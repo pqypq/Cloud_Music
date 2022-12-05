@@ -42,6 +42,8 @@ const Filter = ({setFilteredSongs}) => {
         <div className="w-full my-4 px-6 py-4 flex items-center justify-start md:justify-center gap-10">
             <FilterButtons filterData={artists} flag={"Artist"}/>
 
+            <FilterButtons filterData={filters} flag={"Category"}/>
+
             <FilterButtons filterData={allAlbums} flag={"Albums"}/>
 
             <FilterButtons filterData={filterByLanguage} flag={"Language"}/>
