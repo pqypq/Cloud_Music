@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {NavLink, Route, Routes, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {Logo} from "../assets/img";
 import {useStateValue} from "../Context/StateProvider";
 import {isActiveStyles, isNotActiveStyles} from "../utils/styles";

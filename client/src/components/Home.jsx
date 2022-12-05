@@ -5,7 +5,7 @@ import Filter from "./Filter";
 import SearchBar from "./SearchBar";
 import Dashboard from "./Dashboard";
 import {motion} from "framer-motion";
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 const Home = () => {

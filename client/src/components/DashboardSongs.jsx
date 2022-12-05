@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { AiOutlineClear } from "react-icons/ai";
-import { deleteSongById, getAllSongs } from "../api";
-import { useStateValue } from "../Context/StateProvider";
-import { actionType } from "../Context/reducer";
-import { IoAdd, IoPause, IoPlay, IoTrash } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {motion} from "framer-motion";
+import {AiOutlineClear} from "react-icons/ai";
+import {deleteSongById, getAllSongs} from "../api";
+import {useStateValue} from "../Context/StateProvider";
+import {actionType} from "../Context/reducer";
+import {IoAdd, IoTrash} from "react-icons/io5";
+import {NavLink} from "react-router-dom";
 import AlertSuccess from "./AlertSuccess";
 import AlertError from "./AlertError";
 
