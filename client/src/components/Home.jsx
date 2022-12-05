@@ -18,6 +18,7 @@ const Home = () => {
             filterTerm,
             albumFilter,
             languageFilter,
+            categoryFilter,
         },
         dispatch,
     ] = useStateValue();
@@ -42,6 +43,7 @@ const Home = () => {
                     data.artist.toLowerCase().includes(searchTerm) ||
                     data.language.toLowerCase().includes(searchTerm) ||
                     data.name.toLowerCase().includes(searchTerm) ||
+                    data.category.toLowerCase().includes(searchTerm) ||
                     data.artist.includes(artistFilter)
             );
             setFilteredSongs(filtered);
@@ -69,6 +71,17 @@ const Home = () => {
             setFilteredSongs(null);
         }
     }, [filterTerm]);
+
+    useEffect(() => {
+            const filtered = allSongs?.filter(
+                (data) => data.category === categoryFilter
+            );
+            if (filtered) {
+                setFilteredSongs(filtered);
+            } else {
+                setFilteredSongs(null);
+            }
+        }, [categoryFilter]);
 
     useEffect(() => {
         const filtered = allSongs?.filter((data) => data.album === albumFilter);

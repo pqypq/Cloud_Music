@@ -33,7 +33,8 @@ const DashboardSongs = () => {
         (data) =>
           data.artist.toLowerCase().includes(songFilter) ||
           data.language.toLowerCase().includes(songFilter) ||
-          data.name.toLowerCase().includes(songFilter)
+          data.name.toLowerCase().includes(songFilter) ||
+          data.category.toLowerCase().includes(songFilter)
       );
       setFilteredSongs(filtered);
     } else {

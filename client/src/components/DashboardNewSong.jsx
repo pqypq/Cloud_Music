@@ -160,6 +160,7 @@ const DashboardNewSong = () => {
       artistFilter,
       filterTerm,
       languageFilter,
+      categoryFilter,
     },
     dispatch,
   ] = useStateValue();
@@ -223,7 +224,7 @@ const DashboardNewSong = () => {
         album: albumFilter,
         artist: artistFilter,
         language: languageFilter,
-        category: filterTerm,
+        category: categoryFilter,
       };
 
       saveNewSong(data).then((res) => {
@@ -244,7 +245,7 @@ const DashboardNewSong = () => {
       dispatch({ type: actionType.SET_ARTIST_FILTER, artistFilter: null });
       dispatch({ type: actionType.SET_LANGUAGE_FILTER, languageFilter: null });
       dispatch({ type: actionType.SET_ALBUM_FILTER, albumFilter: null });
-      dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: null });
+      dispatch({ type: actionType.SET_CATEGORY_FILTER, categoryFilter: null });
       setDuration(null);
     }
   };

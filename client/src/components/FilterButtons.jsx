@@ -27,7 +27,7 @@ const FilterButtons = ({ filterData, flag }) => {
     }
 
     if (flag === "Category") {
-      dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: name });
+      dispatch({ type: actionType.SET_CATEGORY_FILTER, categoryFilter: name });
     }
   };
 

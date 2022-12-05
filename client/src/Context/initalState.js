@@ -5,6 +5,7 @@ export const initialState = {
   artists: null,
   artistFilter: null,
   languageFilter: null,
+  categoryFilter: null,
   allUsers: null,
   allSongs: null,
   allAlbums: null,

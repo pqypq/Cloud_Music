@@ -36,10 +36,13 @@ const Filter = ({setFilteredSongs}) => {
         dispatch({type: actionType.SET_ARTIST_FILTER, artistFilter: null});
         dispatch({type: actionType.SET_LANGUAGE_FILTER, languageFilter: null});
         dispatch({type: actionType.SET_ALBUM_FILTER, albumFilter: null});
-        dispatch({type: actionType.SET_FILTER_TERM, filterTerm: null});
+        // dispatch({type: actionType.SET_FILTER_TERM, filterTerm: null});
+        dispatch({type: actionType.SET_CATEGORY_FILTER, categoryFilter: null});
     };
+
     return (
         <div className="w-full my-4 px-6 py-4 flex items-center justify-start md:justify-center gap-10">
+            
             <FilterButtons filterData={artists} flag={"Artist"}/>
 
             <FilterButtons filterData={filters} flag={"Category"}/>
@@ -56,6 +59,7 @@ const Filter = ({setFilteredSongs}) => {
             >
                 <MdClearAll className="text-textColor text-xl cursor-pointer"/>
             </motion.i>
+
         </div>
     );
 };
