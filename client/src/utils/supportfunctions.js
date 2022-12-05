@@ -6,6 +6,7 @@ export const filters = [
   { id: 3, name: "Rock", value: "rock" },
   { id: 4, name: "Melody", value: "melody" },
   { id: 5, name: "Karoke", value: "karoke" },
+  { id: 6, name: "Pop", value: "pop"}
 ];
 
 export const filterByLanguage = [
@@ -14,6 +15,8 @@ export const filterByLanguage = [
   { id: 3, name: "Malayalam", value: "malayalam" },
   { id: 4, name: "Telungu", value: "Telungu" },
   { id: 5, name: "Hindi", value: "hindi" },
+  { id: 6, name: "Mandarin", value: "mandarin"},
+  { id: 7, name: "Cantonese", value: "cantonese"}
 ];
 
 export const deleteAnObject = (referenceUrl) => {

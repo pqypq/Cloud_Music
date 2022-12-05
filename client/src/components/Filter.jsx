@@ -42,7 +42,7 @@ const Filter = ({ setFilteredSongs }) => {
     <div className="w-full my-4 px-6 py-4 flex items-center justify-start md:justify-center gap-10">
       <FilterButtons filterData={artists} flag={"Artist"} />
 
-      <div className=" flex items-center gap-6 mx-4">
+      {/* <div className=" flex items-center gap-6 mx-4">
         {filters?.map((data) => (
           <p
             key={data.id}
@@ -54,7 +54,9 @@ const Filter = ({ setFilteredSongs }) => {
             {data.name}
           </p>
         ))}
-      </div>
+      </div> */}
+
+      <FilterButtons filterData={filters} flag={"Category"} />
 
       <FilterButtons filterData={allAlbums} flag={"Albums"} />
 
