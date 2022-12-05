@@ -33,23 +33,33 @@ const Header = () => {
             </NavLink>
 
 
-
             <ul className="flex items-center justify-center ml-7">
                 {/* prettier-ignore */}
-                <li className="mx-5 text-lg"><NavLink to={'/home'}
-                                                      className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}> Home </NavLink>
+                <li className="mx-5 text-lg">
+                    <NavLink to={'/home'} className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>
+                        Home
+                    </NavLink>
                 </li>
                 {/* prettier-ignore */}
-                <li className="mx-5 text-lg"><NavLink to={'/dashboard/songs'}
-                                                      className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}> Songs </NavLink>
+                <li className="mx-5 text-lg">
+                    <NavLink to={'/dashboard/songs'}
+                             className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>
+                        Songs
+                    </NavLink>
                 </li>
                 {/* prettier-ignore */}
-                <li className="mx-5 text-lg"><NavLink to={'/dashboard/artist'}
-                                                      className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}> Artist </NavLink>
+                <li className="mx-5 text-lg">
+                    <NavLink to={'/dashboard/artist'}
+                             className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>
+                        Artist
+                    </NavLink>
                 </li>
                 {/* prettier-ignore */}
-                <li className="mx-5 text-lg"><NavLink to={'/dashboard/albums'}
-                                                      className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}> Albums </NavLink>
+                <li className="mx-5 text-lg">
+                    <NavLink to={'/dashboard/albums'}
+                             className={({isActive}) => isActive ? isActiveStyles : isNotActiveStyles}>
+                        Albums
+                    </NavLink>
                 </li>
             </ul>
 
