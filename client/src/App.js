@@ -1,31 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {Routes, Route, useNavigate} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import "./App.css";
-import {
-    getAuth,
-    GoogleAuthProvider,
-    inMemoryPersistence,
-    signInWithPopup,
-} from "firebase/auth";
+import {getAuth,} from "firebase/auth";
 import {app} from "./config/firebase.config";
 import {getAllSongs, validateUser} from "./api";
-import {
-    Dashboard,
-    Home,
-    Loader,
-    Login,
-    MusicPlayer,
-    UserProfile,
-} from "./components";
+import {Dashboard, Home, Loader, Login, MusicPlayer, UserProfile,} from "./components";
 import {useStateValue} from "./Context/StateProvider";
 import {actionType} from "./Context/reducer";
-import {motion, AnimatePresence} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 
 function App() {
     const firebaseAuth = getAuth(app);
     const navigate = useNavigate();
-    const [{user, allSongs, song, isSongPlaying, miniPlayer}, dispatch] =
-        useStateValue();
+    const [{user, allSongs, song, isSongPlaying, miniPlayer}, dispatch] = useStateValue();
     const [isLoading, setIsLoading] = useState(false);
 
     const [auth, setAuth] = useState(
