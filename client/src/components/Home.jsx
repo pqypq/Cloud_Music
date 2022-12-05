@@ -62,17 +62,6 @@ const Home = () => {
     }, [artistFilter]);
 
     useEffect(() => {
-        const filtered = allSongs?.filter(
-            (data) => data.category.toLowerCase() === filterTerm
-        );
-        if (filtered) {
-            setFilteredSongs(filtered);
-        } else {
-            setFilteredSongs(null);
-        }
-    }, [filterTerm]);
-
-    useEffect(() => {
             const filtered = allSongs?.filter(
                 (data) => data.category === categoryFilter
             );
@@ -103,6 +92,8 @@ const Home = () => {
         }
     }, [languageFilter]);
 
+    console.log(filteredSongs, 12345)
+
     return (
         <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
             <Dashboard/>
@@ -120,7 +111,7 @@ const Home = () => {
             <Filter setFilteredSongs={setFilteredSongs}/>
 
             <div className="w-full h-auto flex items-center justify-evenly gap-4 flex-wrap p-4">
-                <HomeSongContainer musics={filteredSongs ? filteredSongs : allSongs}/>
+                <HomeSongContainer musics={(filteredSongs === null || filteredSongs.length == 0) ? allSongs : filteredSongs}/>
             </div>
         </div>
     );
