@@ -190,6 +190,7 @@ export const PlayListCard = () => {
             {allSongs.length > 0 ? (
                 allSongs.map((music, index) => (
                     <motion.div
+                        key={index}
                         initial={{opacity: 0, translateX: -50}}
                         animate={{opacity: 1, translateX: 0}}
                         transition={{duration: 0.3, delay: index * 0.1}}

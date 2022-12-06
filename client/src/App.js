@@ -60,6 +60,7 @@ function App() {
         }
     }, []);
 
+
     return (
         <AnimatePresence>
             <div className="h-auto flex items-center justify-center min-w-[680px]">

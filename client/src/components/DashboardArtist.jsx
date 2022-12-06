@@ -1,16 +1,27 @@
 import React, {useEffect} from "react";
 import {useStateValue} from "../Context/StateProvider";
-import {getAllArtist} from "../api";
+import {getAllArtist, getAllSongs} from "../api";
 import {actionType} from "../Context/reducer";
 import ArtistAlbumCard from "./ArtistAlbumCard";
 
 const DashboardArtist = () => {
-    const [{artists}, dispatch] = useStateValue();
+    const [{allSongs, artists}, dispatch] = useStateValue();
 
     useEffect(() => {
         if (!artists) {
             getAllArtist().then((data) => {
                 dispatch({type: actionType.SET_ARTISTS, artists: data.data});
+            });
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!allSongs) {
+            getAllSongs().then((data) => {
+                dispatch({
+                    type: actionType.SET_ALL_SONGS,
+                    allSongs: data.data,
+                });
             });
         }
     }, []);
