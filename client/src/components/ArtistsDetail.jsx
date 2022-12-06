@@ -13,31 +13,22 @@ import Typography from '@mui/material/Typography'
 class ArtistsDetail extends Component {
     state = {
         allSongsForArtist: [],
-        imageURL: ""
     }
 
     componentDidMount() {
-        // const url = unescape(window.location.href)
-        console.log(window.location.href)
-        console.log(this.props)
-        // console.log(url)
-
-        console.log(window.location.href.split("?", 2))
-        // const id = url.split("?")[1].split("=")[1]
-        // getAllSongsForArtist(id).then(r => {
-        //     this.setState({allSongsForArtist: r.data})
-        // })
+        getAllSongsForArtist(this.props.artist).then(r => {
+            this.setState({allSongsForArtist: r.data})
+        })
     }
 
     render() {
         return (
-            <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
-                <Header/>
-                <Box sx={{minWidth: 1330}}>
+            <div>
+                <Box sx={{minWidth: 1536}}>
                     <Card variant="outlined">
                         <CardContent>
                             <img
-                                src={this.props.data?.imageURL}
+                                src={this.props.image}
                                 className="w-full h-40 object-cover rounded-md"
                                 alt=""
                             />
@@ -47,7 +38,7 @@ class ArtistsDetail extends Component {
                         </CardActions>
                     </Card>
                 </Box>
-                <div style={{marginTop: 30}}>
+                <div style={{marginTop: 40}}>
                     <SongContainer data={this.state.allSongsForArtist}/>
                 </div>
             </div>
