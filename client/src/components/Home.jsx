@@ -107,8 +107,6 @@ const Home = () => {
         }
     }, [languageFilter]);
 
-    console.log(filteredSongs, 12345)
-
     return (
         <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
             <Dashboard/>
