@@ -31,6 +31,19 @@ router.get("/artist", async (req, res) => {
     }
 })
 
+router.get("/album", async (req, res) => {
+    const options = {
+        sort: {createdAt: 1},
+    }
+
+    const cursor = await song.find({artist: req.query.album})
+    if (cursor) {
+        res.status(200).send({success: true, data: cursor})
+    } else {
+        res.status(200).send({success: true, msg: "No Data Found"})
+    }
+})
+
 router.get("/getOne/:getOne", async (req, res) => {
     const filter = {_id: req.params.getOne}
 

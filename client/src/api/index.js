@@ -61,6 +61,19 @@ export const getAllSongsForArtist = async (artist) => {
     }
 }
 
+export const getAllSongsForAlbum = async (album) => {
+    try {
+        const res = await axios.get(`${baseURL}api/songs/album`, {
+            params: {album: album}
+        })
+        console.log(album)
+        console.log(res.data)
+        return res.data
+    } catch (error) {
+        return null
+    }
+}
+
 export const getAllAlbums = async () => {
     try {
         const res = await axios.get(`${baseURL}api/albums/getAll`)

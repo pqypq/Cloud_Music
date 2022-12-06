@@ -8,6 +8,7 @@ import {motion} from "framer-motion"
 import React, {useEffect, useState} from 'react'
 import {Route, Routes} from "react-router-dom"
 import ArtistsDetail from "./ArtistsDetail"
+import AlbumDetail from "./AlbumDetail"
 
 
 const Home = () => {
@@ -130,6 +131,10 @@ const Home = () => {
 
             <Routes>
                 <Route path="/artist/detail" element={<ArtistsDetail/>}/>
+            </Routes>
+
+            <Routes>
+                <Route path="/album/detail" element={<AlbumDetail/>}/>
             </Routes>
         </div>
     )
