@@ -1,79 +1,83 @@
-import React, {useEffect, useState} from "react";
-import {useStateValue} from "../Context/StateProvider";
-import {IoMdClose} from "react-icons/io";
-import {IoArrowRedo, IoMusicalNote} from "react-icons/io5";
-import {motion} from "framer-motion";
+import React, {useEffect, useState} from "react"
+import {useStateValue} from "../Context/StateProvider"
+import {IoMdClose} from "react-icons/io"
+import {IoArrowRedo, IoMusicalNote} from "react-icons/io5"
+import {motion} from "framer-motion"
 
-import AudioPlayer from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
-import {actionType} from "../Context/reducer";
-import {getAllSongs} from "../api";
-import {RiPlayListFill} from "react-icons/ri";
+import AudioPlayer from "react-h5-audio-player"
+import "react-h5-audio-player/lib/styles.css"
+import {actionType} from "../Context/reducer"
+import {getAllSongs} from "../api"
+import {RiPlayListFill} from "react-icons/ri"
 
 const MusicPlayer = () => {
-    const [isPlayList, setIsPlayList] = useState(false);
-    const [{allSongs, song, isSongPlaying, miniPlayer}, dispatch] =
-        useStateValue();
+    const [isPlayList, setIsPlayList] = useState(false)
+    const [{allSongs, song, isSongPlaying, miniPlayer}, dispatch] = useStateValue()
+
+    const allSongsMap = {}
+    for (let song of allSongs) {
+        allSongsMap._id = song
+    }
 
     const closeMusicPlayer = () => {
         if (isSongPlaying) {
             dispatch({
                 type: actionType.SET_SONG_PLAYING,
                 isSongPlaying: false,
-            });
+            })
         }
-    };
+    }
 
     const togglePlayer = () => {
         if (miniPlayer) {
             dispatch({
                 type: actionType.SET_MINI_PLAYER,
                 miniPlayer: false,
-            });
+            })
         } else {
             dispatch({
                 type: actionType.SET_MINI_PLAYER,
                 miniPlayer: true,
-            });
+            })
         }
-    };
+    }
 
     const nextTrack = () => {
         if (song > allSongs.length) {
             dispatch({
                 type: actionType.SET_SONG,
                 song: 0,
-            });
+            })
         } else {
             dispatch({
                 type: actionType.SET_SONG,
                 song: song + 1,
-            });
+            })
         }
-    };
+    }
 
     const previousTrack = () => {
         if (song === 0) {
             dispatch({
                 type: actionType.SET_SONG,
                 song: 0,
-            });
+            })
         } else {
             dispatch({
                 type: actionType.SET_SONG,
                 song: song - 1,
-            });
+            })
         }
-    };
+    }
 
     useEffect(() => {
         if (song > allSongs.length) {
             dispatch({
                 type: actionType.SET_SONG,
                 song: 0,
-            });
+            })
         }
-    }, [song]);
+    }, [song])
 
     return (
         <div className="w-full full flex items-center gap-3 overflow-hidden">
@@ -153,36 +157,36 @@ const MusicPlayer = () => {
                 </motion.div>
             )}
         </div>
-    );
-};
+    )
+}
 
 export const PlayListCard = () => {
-    const [{allSongs, song, isSongPlaying}, dispatch] = useStateValue();
+    const [{allSongs, song, isSongPlaying}, dispatch] = useStateValue()
     useEffect(() => {
         if (!allSongs) {
             getAllSongs().then((data) => {
                 dispatch({
                     type: actionType.SET_ALL_SONGS,
                     allSongs: data.data,
-                });
-            });
+                })
+            })
         }
-    }, []);
+    }, [])
 
     const setCurrentPlaySong = (songindex) => {
         if (!isSongPlaying) {
             dispatch({
                 type: actionType.SET_SONG_PLAYING,
                 isSongPlaying: true,
-            });
+            })
         }
         if (song !== songindex) {
             dispatch({
                 type: actionType.SET_SONG,
                 song: songindex,
-            });
+            })
         }
-    };
+    }
 
     return (
         <div
@@ -224,7 +228,7 @@ export const PlayListCard = () => {
                 <></>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default MusicPlayer;
+export default MusicPlayer
