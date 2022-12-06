@@ -14,9 +14,25 @@ const MusicPlayer = () => {
     const [isPlayList, setIsPlayList] = useState(false)
     const [{allSongs, song, isSongPlaying, miniPlayer}, dispatch] = useStateValue()
 
-    const allSongsMap = {}
+    let allSongsMap = {}
     for (let s of allSongs) {
         allSongsMap[s._id] = s
+    }
+
+    let nextMap = {}
+    let prevMap = {}
+    for (let i = 0; i < allSongs.length; i++) {
+        if (i === allSongs.length - 1) {
+            nextMap[allSongs[i]._id] = allSongs[0]._id
+        } else {
+            nextMap[allSongs[i]._id] = allSongs[i + 1]._id
+        }
+
+        if (i === 0) {
+            prevMap[allSongs[0]._id] = allSongs[allSongs.length - 1]._id
+        } else {
+            prevMap[allSongs[i]._id] = allSongs[i - 1]._id
+        }
     }
 
     const closeMusicPlayer = () => {
@@ -43,43 +59,18 @@ const MusicPlayer = () => {
     }
 
     const nextTrack = () => {
-        if (song > allSongs.length) {
-            dispatch({
-                type: actionType.SET_SONG,
-                song: 0,
-            })
-        } else {
-            dispatch({
-                type: actionType.SET_SONG,
-                song: song + 1,
-            })
-        }
+        dispatch({
+            type: actionType.SET_SONG,
+            song: nextMap[song],
+        })
     }
 
     const previousTrack = () => {
-        if (song === 0) {
-            dispatch({
-                type: actionType.SET_SONG,
-                song: 0,
-            })
-        } else {
-            dispatch({
-                type: actionType.SET_SONG,
-                song: song - 1,
-            })
-        }
+        dispatch({
+            type: actionType.SET_SONG,
+            song: prevMap[song],
+        })
     }
-
-    // useEffect(() => {
-    //     if (song > allSongs.length) {
-    //         dispatch({
-    //             type: actionType.SET_SONG,
-    //             song: 0,
-    //         })
-    //     }
-    // }, [song])
-
-    console.log(allSongsMap, 1234)
 
     return (
         <div className="w-full full flex items-center gap-3 overflow-hidden">
