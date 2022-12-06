@@ -12,15 +12,21 @@ import Typography from '@mui/material/Typography'
 
 class ArtistsDetail extends Component {
     state = {
-        allSongsForArtist: []
+        allSongsForArtist: [],
+        imageURL: ""
     }
 
     componentDidMount() {
-        const url = unescape(window.location.href)
-        const id = url.split("?")[1].split("=")[1]
-        getAllSongsForArtist(id).then(r => {
-            this.setState({allSongsForArtist: r.data})
-        })
+        // const url = unescape(window.location.href)
+        console.log(window.location.href)
+        console.log(this.props)
+        // console.log(url)
+
+        console.log(window.location.href.split("?", 2))
+        // const id = url.split("?")[1].split("=")[1]
+        // getAllSongsForArtist(id).then(r => {
+        //     this.setState({allSongsForArtist: r.data})
+        // })
     }
 
     render() {
@@ -30,20 +36,11 @@ class ArtistsDetail extends Component {
                 <Box sx={{minWidth: 1330}}>
                     <Card variant="outlined">
                         <CardContent>
-                            <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
-                                Word of the Day
-                            </Typography>
-                            <Typography variant="h5" component="div">
-                                ADASDASDASDA
-                            </Typography>
-                            <Typography sx={{mb: 1.5}} color="text.secondary">
-                                adjective
-                            </Typography>
-                            <Typography variant="body2">
-                                well meaning and kindly.
-                                <br/>
-                                {'"a benevolent smile"'}
-                            </Typography>
+                            <img
+                                src={this.props.data?.imageURL}
+                                className="w-full h-40 object-cover rounded-md"
+                                alt=""
+                            />
                         </CardContent>
                         <CardActions>
                             <Button size="small">Learn More</Button>

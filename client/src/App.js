@@ -75,7 +75,7 @@ function App() {
                     <Route path="/*" element={<Home/>}/>
                     <Route path="/dashboard/*" element={<Dashboard/>}/>
                     <Route path="/userProfile" element={<UserProfile/>}/>
-                    <Route path="/artist/detail" element={<ArtistsDetail/>}/>
+                    <Route path="/artist/detail" element={<ArtistsDetail/>} component={ArtistsDetail}/>
                     <Route path="/album/detail" element={<AlbumDetail/>}/>
                 </Routes>
 

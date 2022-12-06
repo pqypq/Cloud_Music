@@ -5,7 +5,11 @@ import {NavLink} from "react-router-dom"
 class ArtistAlbumCard extends Component {
     render() {
         return (
-            <NavLink to={`/${this.props.object}/detail?id=${this.props.objectId}`}>
+            <NavLink to={{
+                pathname: `/${this.props.object}/detail`,
+                state: {img: `${this.props.data?.imageURL}`, id: `${this.props.objectId}`}
+            }}>
+                {/*<NavLink to={`/${this.props.object}/detail/${this.props.objectId}?img=${this.props.data?.imageURL}`}>*/}
                 <motion.div
                     initial={{opacity: 0, translateX: -50}}
                     animate={{opacity: 1, translateX: 0}}
