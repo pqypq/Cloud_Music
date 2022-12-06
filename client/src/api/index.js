@@ -35,8 +35,7 @@ export const getAllUsers = async () => {
 
 export const removeUser = async (userId) => {
     try {
-        const res = axios.delete(`${baseURL}api/users/delete/${userId}`);
-        return res;
+        return axios.delete(`${baseURL}api/users/delete/${userId}`);
     } catch (error) {
         return null;
     }
@@ -45,6 +44,17 @@ export const removeUser = async (userId) => {
 export const getAllSongs = async () => {
     try {
         const res = await axios.get(`${baseURL}api/songs/getAll`);
+        return res.data;
+    } catch (error) {
+        return null;
+    }
+};
+
+export const getAllSongsForArtist = async (artist) => {
+    try {
+        const res = await axios.get(`${baseURL}api/songs/artist`, {
+            params: {artist: artist}
+        });
         return res.data;
     } catch (error) {
         return null;
@@ -62,10 +72,9 @@ export const getAllAlbums = async () => {
 
 export const changingUserRole = async (userId, role) => {
     try {
-        const res = axios.put(`${baseURL}api/users/updateRole/${userId}`, {
+        return axios.put(`${baseURL}api/users/updateRole/${userId}`, {
             data: {role: role},
         });
-        return res;
     } catch (error) {
         return null;
     }
@@ -100,8 +109,7 @@ export const saveNewSong = async (data) => {
 
 export const deleteSongById = async (id) => {
     try {
-        const res = axios.delete(`${baseURL}api/songs/delete/${id}`);
-        return res;
+        return axios.delete(`${baseURL}api/songs/delete/${id}`);
     } catch (error) {
         return null;
     }

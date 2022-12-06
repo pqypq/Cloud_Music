@@ -8,6 +8,8 @@ import {Dashboard, Home, Loader, Login, MusicPlayer, UserProfile,} from "./compo
 import {useStateValue} from "./Context/StateProvider";
 import {actionType} from "./Context/reducer";
 import {AnimatePresence, motion} from "framer-motion";
+import ArtistsDetail from "./components/ArtistsDetail";
+import AlbumDetail from "./components/AlbumDetail";
 
 function App() {
     const firebaseAuth = getAuth(app);
@@ -72,6 +74,8 @@ function App() {
                     <Route path="/*" element={<Home/>}/>
                     <Route path="/dashboard/*" element={<Dashboard/>}/>
                     <Route path="/userProfile" element={<UserProfile/>}/>
+                    <Route path="/artist/detail" element={<ArtistsDetail/>}/>
+                    <Route path="/album/detail" element={<AlbumDetail/>}/>
                 </Routes>
 
                 {isSongPlaying && (

@@ -12,7 +12,6 @@ import {FaCrown} from "react-icons/fa";
 const Header = () => {
     const navigate = useNavigate();
     const [{user}, dispatch] = useStateValue();
-
     const [isMenu, setIsMenu] = useState(false);
 
     const logout = () => {

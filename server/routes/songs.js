@@ -18,6 +18,19 @@ router.get("/getAll", async (req, res) => {
     }
 });
 
+router.get("/artist", async (req, res) => {
+    const options = {
+        sort: {createdAt: 1},
+    };
+
+    const cursor = await song.find({artist: req.query.artist});
+    if (cursor) {
+        res.status(200).send({success: true, data: cursor});
+    } else {
+        res.status(200).send({success: true, msg: "No Data Found"});
+    }
+});
+
 router.get("/getOne/:getOne", async (req, res) => {
     const filter = {_id: req.params.getOne};
 
@@ -31,7 +44,7 @@ router.get("/getOne/:getOne", async (req, res) => {
 });
 
 router.post("/save", async (req, res) => {
-    const newSong = song({
+    const newSong = new song({
         name: req.body.name,
         imageURL: req.body.imageURL,
         songUrl: req.body.songUrl,

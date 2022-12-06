@@ -6,6 +6,8 @@ import SearchBar from "./SearchBar";
 import Dashboard from "./Dashboard";
 import {motion} from "framer-motion";
 import React, {useEffect, useState} from 'react';
+import {Route, Routes} from "react-router-dom";
+import ArtistsDetail from "./ArtistsDetail";
 
 
 const Home = () => {
@@ -127,6 +129,10 @@ const Home = () => {
                 <HomeSongContainer
                     musics={(filteredSongs === null || filteredSongs.length === 0) ? allSongs : filteredSongs}/>
             </div>
+
+            <Routes>
+                <Route path="/artist/detail" element={<ArtistsDetail/>}/>
+            </Routes>
         </div>
     );
 };
