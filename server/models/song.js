@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const SongSchema = mongoose.Schema(
     {
@@ -31,6 +31,6 @@ const SongSchema = mongoose.Schema(
         },
     },
     {timestamps: true}
-);
+)
 
-module.exports = mongoose.model("song", SongSchema);
+module.exports = mongoose.model("song", SongSchema)
