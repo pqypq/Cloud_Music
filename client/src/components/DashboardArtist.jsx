@@ -8,9 +8,8 @@ import ArtistsDetail from "./ArtistsDetail";
 const DashboardArtist = () => {
     const [{allSongs, artists}, dispatch] = useStateValue()
     const [showArtistDetail, setShowArtistDetail] = useState(false)
-    const [artist, setArtist] = useState()
-    const [image, setImage] = useState()
     const [showArtists, setShowArtists] = useState(true)
+    const [artistData, setArtistData] = useState()
 
     useEffect(() => {
         if (!artists) {
@@ -43,8 +42,7 @@ const DashboardArtist = () => {
                     className="relative w-full gap-3  my-4 p-4 py-12 border border-gray-300 rounded-md flex flex-wrap justify-evenly">
                     {artists.map((data, index) => (
                         <div key={index} onClick={() => {
-                            setArtist(data.name)
-                            setImage(data.imageURL)
+                            setArtistData(data)
                             setShowArtistDetail(true)
                             setShowArtists(false)
                         }}>
@@ -53,7 +51,7 @@ const DashboardArtist = () => {
                     ))}
                 </div>
             }
-            {showArtistDetail && <ArtistsDetail artist={artist} image={image} closeDetail={closeDetail}/>}
+            {showArtistDetail && <ArtistsDetail data={artistData} closeDetail={closeDetail}/>}
         </div>
     )
 }

@@ -4,7 +4,6 @@ import {getAllSongsForArtist} from "../api"
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
-import Chip from '@mui/material/Chip';
 import {AiOutlineClose} from "react-icons/ai";
 
 
@@ -14,7 +13,7 @@ class ArtistsDetail extends Component {
     }
 
     componentDidMount() {
-        getAllSongsForArtist(this.props.artist).then(r => {
+        getAllSongsForArtist(this.props.data.name).then(r => {
             this.setState({allSongsForArtist: r.data})
         })
     }
@@ -25,7 +24,7 @@ class ArtistsDetail extends Component {
                 <Box sx={{minWidth: 1536}}>
                     <Card variant="outlined">
                         <CardContent>
-                            <img src={this.props.image} alt="" width={300} style={{display: "inline-block"}}/>
+                            <img src={this.props.data.imageURL} alt="" width={300} style={{display: "inline-block"}}/>
                             <AiOutlineClose onClick={this.props.closeDetail}
                                             style={{float: "right", display: "inline-block"}}/>
                         </CardContent>
