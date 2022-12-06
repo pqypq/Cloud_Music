@@ -1,13 +1,13 @@
-import {getAllSongs} from "../api";
-import {actionType} from "../Context/reducer";
-import {useStateValue} from "../Context/StateProvider";
-import Filter from "./Filter";
-import SearchBar from "./SearchBar";
-import Dashboard from "./Dashboard";
-import {motion} from "framer-motion";
-import React, {useEffect, useState} from 'react';
-import {Route, Routes} from "react-router-dom";
-import ArtistsDetail from "./ArtistsDetail";
+import {getAllSongs} from "../api"
+import {actionType} from "../Context/reducer"
+import {useStateValue} from "../Context/StateProvider"
+import Filter from "./Filter"
+import SearchBar from "./SearchBar"
+import Dashboard from "./Dashboard"
+import {motion} from "framer-motion"
+import React, {useEffect, useState} from 'react'
+import {Route, Routes} from "react-router-dom"
+import ArtistsDetail from "./ArtistsDetail"
 
 
 const Home = () => {
@@ -24,9 +24,9 @@ const Home = () => {
             categoryFilter,
         },
         dispatch,
-    ] = useStateValue();
+    ] = useStateValue()
 
-    const [filteredSongs, setFilteredSongs] = useState(null);
+    const [filteredSongs, setFilteredSongs] = useState(null)
 
     useEffect(() => {
         if (!allSongs) {
@@ -34,10 +34,10 @@ const Home = () => {
                 dispatch({
                     type: actionType.SET_ALL_SONGS,
                     allSongs: data.data,
-                });
-            });
+                })
+            })
         }
-    }, []);
+    }, [])
 
     useEffect(() => {
         if (searchTerm.length > 0) {
@@ -48,64 +48,64 @@ const Home = () => {
                     data.name.toLowerCase().includes(searchTerm) ||
                     data.category.toLowerCase().includes(searchTerm) ||
                     data.artist.includes(artistFilter)
-            );
-            setFilteredSongs(filtered);
+            )
+            setFilteredSongs(filtered)
         } else {
-            setFilteredSongs(null);
+            setFilteredSongs(null)
         }
-    }, [searchTerm]);
+    }, [searchTerm])
 
     useEffect(() => {
-        const filtered = allSongs?.filter((data) => data.artist === artistFilter);
+        const filtered = allSongs?.filter((data) => data.artist === artistFilter)
         if (filtered) {
-            setFilteredSongs(filtered);
+            setFilteredSongs(filtered)
         } else {
-            setFilteredSongs(null);
+            setFilteredSongs(null)
         }
-    }, [artistFilter]);
-
-    useEffect(() => {
-        const filtered = allSongs?.filter(
-            (data) => data.category === categoryFilter
-        );
-        if (filtered) {
-            setFilteredSongs(filtered);
-        } else {
-            setFilteredSongs(null);
-        }
-    }, [categoryFilter]);
-
+    }, [artistFilter])
 
     useEffect(() => {
         const filtered = allSongs?.filter(
             (data) => data.category === categoryFilter
-        );
+        )
         if (filtered) {
-            setFilteredSongs(filtered);
+            setFilteredSongs(filtered)
         } else {
-            setFilteredSongs(null);
+            setFilteredSongs(null)
         }
-    }, [categoryFilter]);
+    }, [categoryFilter])
+
 
     useEffect(() => {
-        const filtered = allSongs?.filter((data) => data.album === albumFilter);
+        const filtered = allSongs?.filter(
+            (data) => data.category === categoryFilter
+        )
         if (filtered) {
-            setFilteredSongs(filtered);
+            setFilteredSongs(filtered)
         } else {
-            setFilteredSongs(null);
+            setFilteredSongs(null)
         }
-    }, [albumFilter]);
+    }, [categoryFilter])
+
+    useEffect(() => {
+        const filtered = allSongs?.filter((data) => data.album === albumFilter)
+        if (filtered) {
+            setFilteredSongs(filtered)
+        } else {
+            setFilteredSongs(null)
+        }
+    }, [albumFilter])
 
     useEffect(() => {
         const filtered = allSongs?.filter(
             (data) => data.language === languageFilter
-        );
+        )
         if (filtered) {
-            setFilteredSongs(filtered);
+            setFilteredSongs(filtered)
         } else {
-            setFilteredSongs(null);
+            setFilteredSongs(null)
         }
-    }, [languageFilter]);
+    }, [languageFilter])
 
     return (
         <div className="w-full h-auto flex flex-col items-center justify-center bg-primary">
@@ -132,26 +132,27 @@ const Home = () => {
                 <Route path="/artist/detail" element={<ArtistsDetail/>}/>
             </Routes>
         </div>
-    );
-};
+    )
+}
 
 export const HomeSongContainer = ({musics}) => {
-    const [{isSongPlaying, song}, dispatch] = useStateValue();
+    const [{isSongPlaying, song}, dispatch] = useStateValue()
 
-    const addSongToContext = (index) => {
+    const addSongToContext = (id) => {
         if (!isSongPlaying) {
             dispatch({
                 type: actionType.SET_SONG_PLAYING,
                 isSongPlaying: true,
-            });
+            })
         }
-        if (song !== index) {
+        if (song !== id) {
             dispatch({
                 type: actionType.SET_SONG,
-                song: index,
-            });
+                song: id,
+            })
         }
-    };
+    }
+    
     return (
         <>
             {musics?.map((data, index) => (
@@ -162,7 +163,7 @@ export const HomeSongContainer = ({musics}) => {
                     animate={{opacity: 1, translateX: 0}}
                     transition={{duration: 0.3, delay: index * 0.1}}
                     className="relative w-40 min-w-210 px-2 py-4 cursor-pointer hover:shadow-xl hover:bg-card bg-gray-100 shadow-md rounded-lg flex flex-col items-center"
-                    onClick={() => addSongToContext(index)}
+                    onClick={() => addSongToContext(data._id)}
                 >
                     <div
                         className="w-40 min-w-[160px] h-40 min-h-[160px] rounded-lg drop-shadow-lg relative overflow-hidden">
@@ -183,7 +184,7 @@ export const HomeSongContainer = ({musics}) => {
                 </motion.div>
             ))}
         </>
-    );
-};
+    )
+}
 
-export default Home;
+export default Home

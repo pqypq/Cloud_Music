@@ -15,8 +15,8 @@ const MusicPlayer = () => {
     const [{allSongs, song, isSongPlaying, miniPlayer}, dispatch] = useStateValue()
 
     const allSongsMap = {}
-    for (let song of allSongs) {
-        allSongsMap._id = song
+    for (let s of allSongs) {
+        allSongsMap[s._id] = s
     }
 
     const closeMusicPlayer = () => {
@@ -70,14 +70,16 @@ const MusicPlayer = () => {
         }
     }
 
-    useEffect(() => {
-        if (song > allSongs.length) {
-            dispatch({
-                type: actionType.SET_SONG,
-                song: 0,
-            })
-        }
-    }, [song])
+    // useEffect(() => {
+    //     if (song > allSongs.length) {
+    //         dispatch({
+    //             type: actionType.SET_SONG,
+    //             song: 0,
+    //         })
+    //     }
+    // }, [song])
+
+    console.log(allSongsMap, 1234)
 
     return (
         <div className="w-full full flex items-center gap-3 overflow-hidden">
@@ -87,23 +89,23 @@ const MusicPlayer = () => {
                 }`}
             >
                 <img
-                    src={allSongs[song]?.imageURL}
+                    src={allSongsMap[song]?.imageURL}
                     className="w-40 h-20 object-cover rounded-md"
                     alt=""
                 />
                 <div className="flex items-start flex-col">
                     <p className="text-xl text-headingColor font-semibold">
                         {`${
-                            allSongs[song]?.name.length > 20
-                                ? allSongs[song]?.name.slice(0, 20)
-                                : allSongs[song]?.name
+                            allSongsMap[song]?.name.length > 20
+                                ? allSongsMap[song]?.name.slice(0, 20)
+                                : allSongsMap[song]?.name
                         }`}{" "}
-                        <span className="text-base">({allSongs[song]?.album})</span>
+                        <span className="text-base">({allSongsMap[song]?.album})</span>
                     </p>
                     <p className="text-textColor">
-                        {allSongs[song]?.artist}{" "}
+                        {allSongsMap[song]?.artist}{" "}
                         <span className="text-sm text-textColor font-semibold">
-              ({allSongs[song]?.category})
+              ({allSongsMap[song]?.category})
             </span>
                     </p>
                     <motion.i
@@ -115,7 +117,7 @@ const MusicPlayer = () => {
                 </div>
                 <div className="flex-1">
                     <AudioPlayer
-                        src={allSongs[song]?.songUrl}
+                        src={allSongsMap[song]?.songUrl}
                         onPlay={() => console.log("is playing")}
                         autoPlay={true}
                         showSkipControls={true}
@@ -149,7 +151,7 @@ const MusicPlayer = () => {
                         <div className="absolute inset-0 rounded-full bg-red-600 blur-xl animate-pulse"></div>
                         <img
                             onClick={togglePlayer}
-                            src={allSongs[song]?.imageURL}
+                            src={allSongsMap[song]?.imageURL}
                             className="z-50 w-32 h-32 rounded-full object-cover cursor-pointer"
                             alt=""
                         />
@@ -162,6 +164,7 @@ const MusicPlayer = () => {
 
 export const PlayListCard = () => {
     const [{allSongs, song, isSongPlaying}, dispatch] = useStateValue()
+
     useEffect(() => {
         if (!allSongs) {
             getAllSongs().then((data) => {
@@ -173,17 +176,24 @@ export const PlayListCard = () => {
         }
     }, [])
 
-    const setCurrentPlaySong = (songindex) => {
+    console.log(song)
+
+    const allSongsMap = {}
+    for (let song of allSongs) {
+        allSongsMap._id = song
+    }
+
+    const setCurrentPlaySong = (songId) => {
         if (!isSongPlaying) {
             dispatch({
                 type: actionType.SET_SONG_PLAYING,
                 isSongPlaying: true,
             })
         }
-        if (song !== songindex) {
+        if (song !== songId) {
             dispatch({
                 type: actionType.SET_SONG,
-                song: songindex,
+                song: songId,
             })
         }
     }
@@ -201,7 +211,7 @@ export const PlayListCard = () => {
                         className={`group w-full p-4 hover:bg-card flex gap-3 items-center cursor-pointer ${
                             music?._id === song._id ? "bg-card" : "bg-transparent"
                         }`}
-                        onClick={() => setCurrentPlaySong(index)}
+                        onClick={() => setCurrentPlaySong(music._id)}
                     >
                         <IoMusicalNote
                             className="text-textColor group-hover:text-headingColor text-2xl cursor-pointer"/>

@@ -13,10 +13,10 @@ const SongCard = ({data, index}) => {
                 isSongPlaying: true,
             })
         }
-        if (song !== index) {
+        if (song !== data._id) {
             dispatch({
                 type: actionType.SET_SONG,
-                song: index,
+                song: data._id,
             })
         }
     }
