@@ -1,7 +1,7 @@
-import React from "react";
+import React from "react"
 
-import {BsEmojiSmile} from "react-icons/bs";
-import {motion} from "framer-motion";
+import {BsEmojiSmile} from "react-icons/bs"
+import {motion} from "framer-motion"
 
 const AlertSuccess = ({msg}) => {
     return (
@@ -19,7 +19,7 @@ const AlertSuccess = ({msg}) => {
                 </p>
             </div>
         </motion.div>
-    );
-};
+    )
+}
 
-export default AlertSuccess;
+export default AlertSuccess

@@ -1,17 +1,17 @@
-import React from "react";
-import {IoSearch} from "react-icons/io5";
-import {actionType} from "../Context/reducer";
-import {useStateValue} from "../Context/StateProvider";
+import React from "react"
+import {IoSearch} from "react-icons/io5"
+import {actionType} from "../Context/reducer"
+import {useStateValue} from "../Context/StateProvider"
 
 const SearchBar = () => {
-    const [{searchTerm}, dispatch] = useStateValue();
+    const [{searchTerm}, dispatch] = useStateValue()
 
     const setSearchTerm = (value) => {
         dispatch({
             type: actionType.SET_SEARCH_TERM,
             searchTerm: value,
-        });
-    };
+        })
+    }
 
     return (
         <div className="w-full my-4 h-16 bg-card flex items-center justify-center">
@@ -26,7 +26,7 @@ const SearchBar = () => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SearchBar;
+export default SearchBar

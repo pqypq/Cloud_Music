@@ -1,44 +1,44 @@
-import React, {useEffect} from "react";
-import {actionType} from "../Context/reducer";
-import {useStateValue} from "../Context/StateProvider";
-import {getAllAlbums, getAllArtist} from "../api";
-import {filterByLanguage, filters} from "../utils/supportfunctions";
-import FilterButtons from "./FilterButtons";
-import {MdClearAll} from "react-icons/md";
-import {motion} from "framer-motion";
+import React, {useEffect} from "react"
+import {actionType} from "../Context/reducer"
+import {useStateValue} from "../Context/StateProvider"
+import {getAllAlbums, getAllArtist} from "../api"
+import {filterByLanguage, filters} from "../utils/supportfunctions"
+import FilterButtons from "./FilterButtons"
+import {MdClearAll} from "react-icons/md"
+import {motion} from "framer-motion"
 
 const Filter = ({setFilteredSongs}) => {
-    const [{filterTerm, artists, allAlbums}, dispatch] = useStateValue();
+    const [{filterTerm, artists, allAlbums}, dispatch] = useStateValue()
 
     useEffect(() => {
         if (!artists) {
             getAllArtist().then((data) => {
-                dispatch({type: actionType.SET_ARTISTS, artists: data.data});
-            });
+                dispatch({type: actionType.SET_ARTISTS, artists: data.data})
+            })
         }
 
         if (!allAlbums) {
             getAllAlbums().then((data) => {
-                dispatch({type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data});
-            });
+                dispatch({type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data})
+            })
         }
-    }, []);
+    }, [])
 
     const updateFilter = (value) => {
         dispatch({
             type: actionType.SET_FILTER_TERM,
             filterTerm: value,
-        });
-    };
+        })
+    }
 
     const clearAllFilter = () => {
-        setFilteredSongs(null);
-        dispatch({type: actionType.SET_ARTIST_FILTER, artistFilter: null});
-        dispatch({type: actionType.SET_LANGUAGE_FILTER, languageFilter: null});
-        dispatch({type: actionType.SET_ALBUM_FILTER, albumFilter: null});
-        // dispatch({type: actionType.SET_FILTER_TERM, filterTerm: null});
-        dispatch({type: actionType.SET_CATEGORY_FILTER, categoryFilter: null});
-    };
+        setFilteredSongs(null)
+        dispatch({type: actionType.SET_ARTIST_FILTER, artistFilter: null})
+        dispatch({type: actionType.SET_LANGUAGE_FILTER, languageFilter: null})
+        dispatch({type: actionType.SET_ALBUM_FILTER, albumFilter: null})
+        // dispatch({type: actionType.SET_FILTER_TERM, filterTerm: null})
+        dispatch({type: actionType.SET_CATEGORY_FILTER, categoryFilter: null})
+    }
 
     return (
         <div className="w-full my-4 px-6 py-4 flex items-center justify-start md:justify-center gap-10">
@@ -61,7 +61,7 @@ const Filter = ({setFilteredSongs}) => {
             </motion.i>
 
         </div>
-    );
-};
+    )
+}
 
-export default Filter;
+export default Filter

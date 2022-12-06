@@ -1,9 +1,9 @@
-import React from "react";
-import {Route, Routes} from "react-router-dom";
-import {DashboardNewSong, Header} from ".";
-import DashboardAlbum from "./DashboardAlbum";
-import DashboardArtist from "./DashboardArtist";
-import DashboardSongs from "./DashboardSongs";
+import React from "react"
+import {Route, Routes} from "react-router-dom"
+import {DashboardNewSong, Header} from "."
+import DashboardAlbum from "./DashboardAlbum"
+import DashboardArtist from "./DashboardArtist"
+import DashboardSongs from "./DashboardSongs"
 
 
 const Dashboard = () => {
@@ -21,7 +21,7 @@ const Dashboard = () => {
                 </Routes>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Dashboard;
+export default Dashboard

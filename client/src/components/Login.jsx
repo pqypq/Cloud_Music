@@ -1,54 +1,54 @@
-import React, {useEffect} from "react";
-import {LoginBg} from "../assets/video";
-import {FcGoogle} from "react-icons/fc";
-import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
-import {app} from "../config/firebase.config";
-import {useNavigate} from "react-router-dom";
-import {validateUser} from "../api";
-import {actionType} from "../Context/reducer";
-import {useStateValue} from "../Context/StateProvider";
+import React, {useEffect} from "react"
+import {LoginBg} from "../assets/video"
+import {FcGoogle} from "react-icons/fc"
+import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+import {app} from "../config/firebase.config"
+import {useNavigate} from "react-router-dom"
+import {validateUser} from "../api"
+import {actionType} from "../Context/reducer"
+import {useStateValue} from "../Context/StateProvider"
 
 const Login = ({setAuth}) => {
-    const firebaseAuth = getAuth(app);
-    const provider = new GoogleAuthProvider();
-    const navigate = useNavigate();
-    const [{user}, dispatch] = useStateValue();
+    const firebaseAuth = getAuth(app)
+    const provider = new GoogleAuthProvider()
+    const navigate = useNavigate()
+    const [{user}, dispatch] = useStateValue()
 
     const loginWithGoogle = async () => {
         await signInWithPopup(firebaseAuth, provider).then((userCred) => {
             if (userCred) {
-                setAuth(true);
-                window.localStorage.setItem("auth", "true");
+                setAuth(true)
+                window.localStorage.setItem("auth", "true")
 
                 firebaseAuth.onAuthStateChanged((userCred) => {
                     if (userCred) {
                         userCred.getIdToken().then((token) => {
-                            window.localStorage.setItem("auth", "true");
+                            window.localStorage.setItem("auth", "true")
                             validateUser(token).then((data) => {
                                 dispatch({
                                     type: actionType.SET_USER,
                                     user: data,
-                                });
-                            });
-                        });
-                        navigate("/", {replace: true});
+                                })
+                            })
+                        })
+                        navigate("/", {replace: true})
                     } else {
-                        setAuth(false);
+                        setAuth(false)
                         dispatch({
                             type: actionType.SET_USER,
                             user: null,
-                        });
-                        navigate("/login");
+                        })
+                        navigate("/login")
                     }
-                });
+                })
             }
-        });
-    };
+        })
+    }
 
     useEffect(() => {
         if (window.localStorage.getItem("auth") === "true")
-            navigate("/", {replace: true});
-    }, []);
+            navigate("/", {replace: true})
+    }, [])
 
     return (
         <div className="relative w-screen h-screen">
@@ -73,7 +73,7 @@ const Login = ({setAuth}) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Login;
+export default Login

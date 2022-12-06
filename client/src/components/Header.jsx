@@ -1,29 +1,29 @@
-import React, {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
-import {Logo} from "../assets/img";
-import {useStateValue} from "../Context/StateProvider";
-import {isActiveStyles, isNotActiveStyles} from "../utils/styles";
-import {getAuth} from "firebase/auth";
-import {app} from "../config/firebase.config";
-import {motion} from "framer-motion";
+import React, {useState} from "react"
+import {NavLink, useNavigate} from "react-router-dom"
+import {Logo} from "../assets/img"
+import {useStateValue} from "../Context/StateProvider"
+import {isActiveStyles, isNotActiveStyles} from "../utils/styles"
+import {getAuth} from "firebase/auth"
+import {app} from "../config/firebase.config"
+import {motion} from "framer-motion"
 
-import {FaCrown} from "react-icons/fa";
+import {FaCrown} from "react-icons/fa"
 
 const Header = () => {
-    const navigate = useNavigate();
-    const [{user}, dispatch] = useStateValue();
-    const [isMenu, setIsMenu] = useState(false);
+    const navigate = useNavigate()
+    const [{user}, dispatch] = useStateValue()
+    const [isMenu, setIsMenu] = useState(false)
 
     const logout = () => {
-        const firebaseAuth = getAuth(app);
+        const firebaseAuth = getAuth(app)
         firebaseAuth
             .signOut()
             .then(() => {
-                window.localStorage.setItem("auth", "false");
+                window.localStorage.setItem("auth", "false")
             })
-            .catch((e) => console.log(e));
-        navigate("/login", {replace: true});
-    };
+            .catch((e) => console.log(e))
+        navigate("/login", {replace: true})
+    }
 
     return (
         <header className="flex items-center w-full p-4 md:py-2 md:px-6">
@@ -119,7 +119,7 @@ const Header = () => {
                 )}
             </div>
         </header>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import Header from "./Header";
+import React, {Component} from 'react'
+import Header from "./Header"
 
 class AlbumDetail extends Component {
     render() {
@@ -8,8 +8,8 @@ class AlbumDetail extends Component {
                 <Header/>
                 AlbumDetail
             </div>
-        );
+        )
     }
 }
 
-export default AlbumDetail;
+export default AlbumDetail

@@ -1,35 +1,35 @@
-import React, {useState} from "react";
-import {IoChevronDown} from "react-icons/io5";
+import React, {useState} from "react"
+import {IoChevronDown} from "react-icons/io5"
 
-import {motion} from "framer-motion";
-import {useStateValue} from "../Context/StateProvider";
-import {actionType} from "../Context/reducer";
+import {motion} from "framer-motion"
+import {useStateValue} from "../Context/StateProvider"
+import {actionType} from "../Context/reducer"
 
 const FilterButtons = ({filterData, flag}) => {
-    const [filterName, setFilterName] = useState(null);
-    const [filterMenu, setFilterMenu] = useState(false);
+    const [filterName, setFilterName] = useState(null)
+    const [filterMenu, setFilterMenu] = useState(false)
 
-    const [{artistFilter, albumFilter, filterTerm}, dispatch] = useStateValue();
+    const [{artistFilter, albumFilter, filterTerm}, dispatch] = useStateValue()
 
     const updateFilterButton = (name) => {
-        setFilterName(name);
-        setFilterMenu(false);
+        setFilterName(name)
+        setFilterMenu(false)
 
         if (flag === "Artist") {
-            dispatch({type: actionType.SET_ARTIST_FILTER, artistFilter: name});
+            dispatch({type: actionType.SET_ARTIST_FILTER, artistFilter: name})
         }
         if (flag === "Language") {
-            dispatch({type: actionType.SET_LANGUAGE_FILTER, languageFilter: name});
+            dispatch({type: actionType.SET_LANGUAGE_FILTER, languageFilter: name})
         }
 
         if (flag === "Albums") {
-            dispatch({type: actionType.SET_ALBUM_FILTER, albumFilter: name});
+            dispatch({type: actionType.SET_ALBUM_FILTER, albumFilter: name})
         }
 
         if (flag === "Category") {
-            dispatch({type: actionType.SET_CATEGORY_FILTER, categoryFilter: name});
+            dispatch({type: actionType.SET_CATEGORY_FILTER, categoryFilter: name})
         }
-    };
+    }
 
     return (
         <div className="border border-gray-300 rounded-md px-4 py-1 relative cursor-pointer hover:border-gray-400">
@@ -81,7 +81,7 @@ const FilterButtons = ({filterData, flag}) => {
                 </motion.div>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default FilterButtons;
+export default FilterButtons

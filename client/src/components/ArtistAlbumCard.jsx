@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {motion} from "framer-motion";
-import {NavLink} from "react-router-dom";
+import React, {Component} from 'react'
+import {motion} from "framer-motion"
+import {NavLink} from "react-router-dom"
 
 class ArtistAlbumCard extends Component {
     render() {
@@ -21,8 +21,8 @@ class ArtistAlbumCard extends Component {
                     <p className="text-base text-textColor">{this.props.data.name}</p>
                 </motion.div>
             </NavLink>
-        );
+        )
     }
 }
 
-export default ArtistAlbumCard;
+export default ArtistAlbumCard

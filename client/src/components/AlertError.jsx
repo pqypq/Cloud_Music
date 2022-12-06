@@ -1,6 +1,6 @@
-import React from "react";
-import {BsEmojiFrown} from "react-icons/bs";
-import {motion} from "framer-motion";
+import React from "react"
+import {BsEmojiFrown} from "react-icons/bs"
+import {motion} from "framer-motion"
 
 const AlertError = ({msg}) => {
     return (
@@ -18,7 +18,7 @@ const AlertError = ({msg}) => {
                 </p>
             </div>
         </motion.div>
-    );
-};
+    )
+}
 
-export default AlertError;
+export default AlertError

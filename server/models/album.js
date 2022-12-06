@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const albumSchema = mongoose.Schema(
     {
@@ -13,6 +13,6 @@ const albumSchema = mongoose.Schema(
         },
     },
     {timestamps: true}
-);
+)
 
-module.exports = mongoose.model("album", albumSchema);
+module.exports = mongoose.model("album", albumSchema)

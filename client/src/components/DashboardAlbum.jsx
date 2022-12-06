@@ -1,20 +1,20 @@
-import React, {useEffect} from "react";
-import {useStateValue} from "../Context/StateProvider";
-import {actionType} from "../Context/reducer";
-import {getAllAlbums} from "../api";
-import ArtistAlbumCard from "./ArtistAlbumCard";
+import React, {useEffect} from "react"
+import {useStateValue} from "../Context/StateProvider"
+import {actionType} from "../Context/reducer"
+import {getAllAlbums} from "../api"
+import ArtistAlbumCard from "./ArtistAlbumCard"
 
 
 const DashboardAlbum = () => {
-    const [{allAlbums}, dispatch] = useStateValue();
+    const [{allAlbums}, dispatch] = useStateValue()
 
     useEffect(() => {
         if (!allAlbums) {
             getAllAlbums().then((data) => {
-                dispatch({type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data});
-            });
+                dispatch({type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data})
+            })
         }
-    }, []);
+    }, [])
 
     return (
         <div className="w-full p-4 flex items-center justify-center flex-col">
@@ -28,7 +28,7 @@ const DashboardAlbum = () => {
                     ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default DashboardAlbum;
+export default DashboardAlbum

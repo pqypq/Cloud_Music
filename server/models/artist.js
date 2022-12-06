@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const artistSchema = mongoose.Schema(
     {
@@ -20,6 +20,6 @@ const artistSchema = mongoose.Schema(
         },
     },
     {timestamps: true}
-);
+)
 
-module.exports = mongoose.model("artist", artistSchema);
+module.exports = mongoose.model("artist", artistSchema)

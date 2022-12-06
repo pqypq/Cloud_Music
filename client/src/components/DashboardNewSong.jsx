@@ -1,18 +1,18 @@
-import React, {useEffect, useRef, useState} from "react";
-import {deleteObject, getDownloadURL, ref, uploadBytesResumable,} from "firebase/storage";
-import {motion} from "framer-motion";
+import React, {useEffect, useRef, useState} from "react"
+import {deleteObject, getDownloadURL, ref, uploadBytesResumable,} from "firebase/storage"
+import {motion} from "framer-motion"
 
-import {BiCloudUpload} from "react-icons/bi";
-import {MdDelete} from "react-icons/md";
+import {BiCloudUpload} from "react-icons/bi"
+import {MdDelete} from "react-icons/md"
 
-import {storage} from "../config/firebase.config";
-import {useStateValue} from "../Context/StateProvider";
-import FilterButtons from "./FilterButtons";
-import {getAllAlbums, getAllArtist, getAllSongs, saveNewAlbum, saveNewArtist, saveNewSong,} from "../api";
-import {actionType} from "../Context/reducer";
-import {filterByLanguage, filters} from "../utils/supportfunctions";
-import AlertSuccess from "./AlertSuccess";
-import AlertError from "./AlertError";
+import {storage} from "../config/firebase.config"
+import {useStateValue} from "../Context/StateProvider"
+import FilterButtons from "./FilterButtons"
+import {getAllAlbums, getAllArtist, getAllSongs, saveNewAlbum, saveNewArtist, saveNewSong,} from "../api"
+import {actionType} from "../Context/reducer"
+import {filterByLanguage, filters} from "../utils/supportfunctions"
+import AlertSuccess from "./AlertSuccess"
+import AlertError from "./AlertError"
 
 export const ImageLoader = ({progress}) => {
     return (
@@ -25,8 +25,8 @@ export const ImageLoader = ({progress}) => {
                 <div className="absolute inset-0 rounded-full bg-red-600 blur-xl "></div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 export const ImageUploader = ({
                                   setImageURL,
@@ -37,42 +37,42 @@ export const ImageUploader = ({
                                   setProgress,
                               }) => {
     const uploadImage = (e) => {
-        isLoading(true);
-        const imageFile = e.target.files[0];
+        isLoading(true)
+        const imageFile = e.target.files[0]
         const storageRef = ref(
             storage,
             `${isImage ? "Images" : "Audio"}/${Date.now()}-${imageFile.name}`
-        );
-        const uploadTask = uploadBytesResumable(storageRef, imageFile);
+        )
+        const uploadTask = uploadBytesResumable(storageRef, imageFile)
 
         uploadTask.on(
             "state_changed",
             (snapshot) => {
-                setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                setProgress((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
             },
 
             (error) => {
-                setAlert("error");
-                alertMsg("File upload failed.");
+                setAlert("error")
+                alertMsg("File upload failed.")
                 setTimeout(() => {
-                    setAlert(null);
-                }, 4000);
-                isLoading(false);
+                    setAlert(null)
+                }, 4000)
+                isLoading(false)
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
-                    setImageURL(downloadUrl);
-                    setProgress(0);
-                    isLoading(false);
-                    setAlert("success");
-                    alertMsg("File uploaded successfully");
+                    setImageURL(downloadUrl)
+                    setProgress(0)
+                    isLoading(false)
+                    setAlert("success")
+                    alertMsg("File uploaded successfully")
                     setTimeout(() => {
-                        setAlert(null);
-                    }, 4000);
-                });
+                        setAlert(null)
+                    }, 4000)
+                })
             }
-        );
-    };
+        )
+    }
 
     return (
         <label>
@@ -94,8 +94,8 @@ export const ImageUploader = ({
                 className="w-0 h-0"
             />
         </label>
-    );
-};
+    )
+}
 
 export const DisabledButton = () => {
     return (
@@ -122,22 +122,22 @@ export const DisabledButton = () => {
             </svg>
             Loading...
         </button>
-    );
-};
+    )
+}
 
 const DashboardNewSong = () => {
-    const [isImageLoading, setIsImageLoading] = useState(false);
-    const [songImageUrl, setSongImageUrl] = useState(null);
-    const [setAlert, setSetAlert] = useState(null);
-    const [alertMsg, setAlertMsg] = useState("");
-    const [uploadProgress, setUploadProgress] = useState(0);
+    const [isImageLoading, setIsImageLoading] = useState(false)
+    const [songImageUrl, setSongImageUrl] = useState(null)
+    const [setAlert, setSetAlert] = useState(null)
+    const [alertMsg, setAlertMsg] = useState("")
+    const [uploadProgress, setUploadProgress] = useState(0)
 
-    const [isAudioLoading, setIsAudioLoading] = useState(false);
+    const [isAudioLoading, setIsAudioLoading] = useState(false)
 
-    const [songName, setSongName] = useState("");
-    const [audioAsset, setAudioAsset] = useState(null);
-    const [duration, setDuration] = useState(null);
-    const audioRef = useRef();
+    const [songName, setSongName] = useState("")
+    const [audioAsset, setAudioAsset] = useState(null)
+    const [duration, setDuration] = useState(null)
+    const audioRef = useRef()
 
     const [
         {
@@ -150,60 +150,60 @@ const DashboardNewSong = () => {
             categoryFilter,
         },
         dispatch,
-    ] = useStateValue();
+    ] = useStateValue()
 
     useEffect(() => {
         if (!artists) {
             getAllArtist().then((data) => {
-                dispatch({type: actionType.SET_ARTISTS, artists: data.data});
-            });
+                dispatch({type: actionType.SET_ARTISTS, artists: data.data})
+            })
         }
 
         if (!allAlbums) {
             getAllAlbums().then((data) => {
-                dispatch({type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data});
-            });
+                dispatch({type: actionType.SET_ALL_ALBUMNS, allAlbums: data.data})
+            })
         }
-    }, []);
+    }, [])
 
     const calculateTime = (sec) => {
-        const minutes = Math.floor(sec / 60);
-        const returnMin = minutes < 10 ? `0${minutes}` : `${minutes}`;
-        const seconds = Math.floor(sec % 60);
-        const returnSec = seconds < 10 ? `0${seconds}` : `${seconds}`;
-        return `${returnMin} : ${returnSec}`;
-    };
+        const minutes = Math.floor(sec / 60)
+        const returnMin = minutes < 10 ? `0${minutes}` : `${minutes}`
+        const seconds = Math.floor(sec % 60)
+        const returnSec = seconds < 10 ? `0${seconds}` : `${seconds}`
+        return `${returnMin} : ${returnSec}`
+    }
 
     const deleteImageObject = (songURL, action) => {
         if (action === "image") {
-            setIsImageLoading(true);
-            setSongImageUrl(null);
+            setIsImageLoading(true)
+            setSongImageUrl(null)
         } else {
-            setIsAudioLoading(true);
-            setAudioAsset(null);
+            setIsAudioLoading(true)
+            setAudioAsset(null)
         }
-        const deleteRef = ref(storage, songURL);
+        const deleteRef = ref(storage, songURL)
         deleteObject(deleteRef).then(() => {
-            setSetAlert("success");
-            setAlertMsg("File removed successfully");
+            setSetAlert("success")
+            setAlertMsg("File removed successfully")
             setTimeout(() => {
-                setSetAlert(null);
-            }, 4000);
-            setIsImageLoading(false);
-            setIsAudioLoading(false);
-        });
-    };
+                setSetAlert(null)
+            }, 4000)
+            setIsImageLoading(false)
+            setIsAudioLoading(false)
+        })
+    }
 
     const saveSong = () => {
         if (!songImageUrl || !audioAsset || !songName) {
-            setSetAlert("error");
-            setAlertMsg("Required fields are missing");
+            setSetAlert("error")
+            setAlertMsg("Required fields are missing")
             setTimeout(() => {
-                setSetAlert(null);
-            }, 4000);
+                setSetAlert(null)
+            }, 4000)
         } else {
-            setIsImageLoading(true);
-            setIsAudioLoading(true);
+            setIsImageLoading(true)
+            setIsAudioLoading(true)
             const data = {
                 name: songName,
                 imageURL: songImageUrl,
@@ -212,30 +212,30 @@ const DashboardNewSong = () => {
                 artist: artistFilter,
                 language: languageFilter,
                 category: categoryFilter,
-            };
+            }
 
             saveNewSong(data).then((res) => {
                 getAllSongs().then((songs) => {
-                    dispatch({type: actionType.SET_ALL_SONGS, allSongs: songs.data});
-                });
-            });
-            setSetAlert("success");
-            setAlertMsg("Data saved successfully");
+                    dispatch({type: actionType.SET_ALL_SONGS, allSongs: songs.data})
+                })
+            })
+            setSetAlert("success")
+            setAlertMsg("Data saved successfully")
             setTimeout(() => {
-                setSetAlert(null);
-            }, 4000);
-            setIsImageLoading(false);
-            setIsAudioLoading(false);
-            setSongName("");
-            setSongImageUrl(null);
-            setAudioAsset(null);
-            dispatch({type: actionType.SET_ARTIST_FILTER, artistFilter: null});
-            dispatch({type: actionType.SET_LANGUAGE_FILTER, languageFilter: null});
-            dispatch({type: actionType.SET_ALBUM_FILTER, albumFilter: null});
-            dispatch({type: actionType.SET_CATEGORY_FILTER, categoryFilter: null});
-            setDuration(null);
+                setSetAlert(null)
+            }, 4000)
+            setIsImageLoading(false)
+            setIsAudioLoading(false)
+            setSongName("")
+            setSongImageUrl(null)
+            setAudioAsset(null)
+            dispatch({type: actionType.SET_ARTIST_FILTER, artistFilter: null})
+            dispatch({type: actionType.SET_LANGUAGE_FILTER, languageFilter: null})
+            dispatch({type: actionType.SET_ALBUM_FILTER, albumFilter: null})
+            dispatch({type: actionType.SET_CATEGORY_FILTER, categoryFilter: null})
+            setDuration(null)
         }
-    };
+    }
 
     return (
         <div className="flex items-center justify-center p-4 border border-gray-300 rounded-md">
@@ -282,7 +282,7 @@ const DashboardNewSong = () => {
                                                 type="button"
                                                 className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
                                                 onClick={() => {
-                                                    deleteImageObject(songImageUrl, "image");
+                                                    deleteImageObject(songImageUrl, "image")
                                                 }}
                                             >
                                                 <MdDelete className="text-white"/>
@@ -315,7 +315,7 @@ const DashboardNewSong = () => {
                                                 type="button"
                                                 className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
                                                 onClick={() => {
-                                                    deleteImageObject(audioAsset, "audio");
+                                                    deleteImageObject(audioAsset, "audio")
                                                 }}
                                             >
                                                 <MdDelete className="text-white"/>
@@ -356,64 +356,64 @@ const DashboardNewSong = () => {
                 </>
             )}
         </div>
-    );
-};
+    )
+}
 
 export const AddNewArtist = () => {
-    const [isArtist, setIsArtist] = useState(false);
-    const [artistProgress, setArtistProgress] = useState(0);
+    const [isArtist, setIsArtist] = useState(false)
+    const [artistProgress, setArtistProgress] = useState(0)
 
-    const [alert, setAlert] = useState(false);
-    const [alertMsg, setAlertMsg] = useState(null);
-    const [artistCoverImage, setArtistCoverImage] = useState(null);
+    const [alert, setAlert] = useState(false)
+    const [alertMsg, setAlertMsg] = useState(null)
+    const [artistCoverImage, setArtistCoverImage] = useState(null)
 
-    const [artistName, setArtistName] = useState("");
-    const [twitter, setTwitter] = useState("");
-    const [instagram, setInstagram] = useState("");
+    const [artistName, setArtistName] = useState("")
+    const [twitter, setTwitter] = useState("")
+    const [instagram, setInstagram] = useState("")
 
-    const [{artists}, dispatch] = useStateValue();
+    const [{artists}, dispatch] = useStateValue()
 
     const deleteImageObject = (songURL) => {
-        setIsArtist(true);
-        setArtistCoverImage(null);
-        const deleteRef = ref(storage, songURL);
+        setIsArtist(true)
+        setArtistCoverImage(null)
+        const deleteRef = ref(storage, songURL)
         deleteObject(deleteRef).then(() => {
-            setAlert("success");
-            setAlertMsg("File removed successfully");
+            setAlert("success")
+            setAlertMsg("File removed successfully")
             setTimeout(() => {
-                setAlert(null);
-            }, 4000);
-            setIsArtist(false);
-        });
-    };
+                setAlert(null)
+            }, 4000)
+            setIsArtist(false)
+        })
+    }
 
     const saveArtist = () => {
         if (!artistCoverImage || !artistName) {
-            setAlert("error");
-            setAlertMsg("Required fields are missing");
+            setAlert("error")
+            setAlertMsg("Required fields are missing")
             setTimeout(() => {
-                setAlert(null);
-            }, 4000);
+                setAlert(null)
+            }, 4000)
         } else {
-            setIsArtist(true);
+            setIsArtist(true)
             const data = {
                 name: artistName,
                 imageURL: artistCoverImage,
                 twitter: twitter,
                 instagram: instagram,
-            };
+            }
             saveNewArtist(data).then((res) => {
                 getAllArtist().then((artistData) => {
-                    dispatch({type: actionType.SET_ARTISTS, artists: artistData.data});
-                });
-            });
-            setIsArtist(false);
-            setArtistCoverImage(null);
-            setArtistName("");
-            setTwitter("");
-            setInstagram("");
+                    dispatch({type: actionType.SET_ARTISTS, artists: artistData.data})
+                })
+            })
+            setIsArtist(false)
+            setArtistCoverImage(null)
+            setArtistName("")
+            setTwitter("")
+            setInstagram("")
         }
-    };
+    }
 
     return (
         <div className="flex items-center justify-evenly w-full flex-wrap">
@@ -442,7 +442,7 @@ export const AddNewArtist = () => {
                                     type="button"
                                     className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
                                     onClick={() => {
-                                        deleteImageObject(artistCoverImage);
+                                        deleteImageObject(artistCoverImage)
                                     }}
                                 >
                                     <MdDelete className="text-white"/>
@@ -513,61 +513,61 @@ export const AddNewArtist = () => {
                 </>
             )}
         </div>
-    );
-};
+    )
+}
 
 export const AddNewAlbum = () => {
-    const [isArtist, setIsArtist] = useState(false);
-    const [artistProgress, setArtistProgress] = useState(0);
+    const [isArtist, setIsArtist] = useState(false)
+    const [artistProgress, setArtistProgress] = useState(0)
 
-    const [alert, setAlert] = useState(false);
-    const [alertMsg, setAlertMsg] = useState(null);
-    const [artistCoverImage, setArtistCoverImage] = useState(null);
+    const [alert, setAlert] = useState(false)
+    const [alertMsg, setAlertMsg] = useState(null)
+    const [artistCoverImage, setArtistCoverImage] = useState(null)
 
-    const [artistName, setArtistName] = useState("");
+    const [artistName, setArtistName] = useState("")
 
-    const [{artists}, dispatch] = useStateValue();
+    const [{artists}, dispatch] = useStateValue()
 
     const deleteImageObject = (songURL) => {
-        setIsArtist(true);
-        setArtistCoverImage(null);
-        const deleteRef = ref(storage, songURL);
+        setIsArtist(true)
+        setArtistCoverImage(null)
+        const deleteRef = ref(storage, songURL)
         deleteObject(deleteRef).then(() => {
-            setAlert("success");
-            setAlertMsg("File removed successfully");
+            setAlert("success")
+            setAlertMsg("File removed successfully")
             setTimeout(() => {
-                setAlert(null);
-            }, 4000);
-            setIsArtist(false);
-        });
-    };
+                setAlert(null)
+            }, 4000)
+            setIsArtist(false)
+        })
+    }
 
     const saveArtist = () => {
         if (!artistCoverImage || !artistName) {
-            setAlert("error");
-            setAlertMsg("Required fields are missing");
+            setAlert("error")
+            setAlertMsg("Required fields are missing")
             setTimeout(() => {
-                setAlert(null);
-            }, 4000);
+                setAlert(null)
+            }, 4000)
         } else {
-            setIsArtist(true);
+            setIsArtist(true)
             const data = {
                 name: artistName,
                 imageURL: artistCoverImage,
-            };
+            }
             saveNewAlbum(data).then((res) => {
                 getAllAlbums().then((albumData) => {
                     dispatch({
                         type: actionType.SET_ALL_ALBUMNS,
                         albumData: albumData.data,
-                    });
-                });
-            });
-            setIsArtist(false);
-            setArtistCoverImage(null);
-            setArtistName("");
+                    })
+                })
+            })
+            setIsArtist(false)
+            setArtistCoverImage(null)
+            setArtistName("")
         }
-    };
+    }
 
     return (
         <div className="flex items-center justify-evenly w-full flex-wrap">
@@ -596,7 +596,7 @@ export const AddNewAlbum = () => {
                                     type="button"
                                     className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md  duration-500 transition-all ease-in-out"
                                     onClick={() => {
-                                        deleteImageObject(artistCoverImage);
+                                        deleteImageObject(artistCoverImage)
                                     }}
                                 >
                                     <MdDelete className="text-white"/>
@@ -641,7 +641,7 @@ export const AddNewAlbum = () => {
                 </>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default DashboardNewSong;
+export default DashboardNewSong

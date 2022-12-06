@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import Header from "./Header";
-import SongContainer from "./SongContainer";
-import {getAllSongsForArtist} from "../api";
+import React, {Component} from 'react'
+import Header from "./Header"
+import SongContainer from "./SongContainer"
+import {getAllSongsForArtist} from "../api"
 
 class ArtistsDetail extends Component {
     state = {
@@ -22,8 +22,8 @@ class ArtistsDetail extends Component {
                 <Header/>
                 <SongContainer data={this.state.allSongsForSinger}/>
             </div>
-        );
+        )
     }
 }
 
-export default ArtistsDetail;
+export default ArtistsDetail

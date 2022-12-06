@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {motion} from "framer-motion";
-import {AiOutlineClear} from "react-icons/ai";
-import {getAllSongs} from "../api";
-import {useStateValue} from "../Context/StateProvider";
-import {actionType} from "../Context/reducer";
-import {IoAdd} from "react-icons/io5";
-import {NavLink} from "react-router-dom";
-import SongContainer from "./SongContainer";
+import React, {useEffect, useState} from "react"
+import {motion} from "framer-motion"
+import {AiOutlineClear} from "react-icons/ai"
+import {getAllSongs} from "../api"
+import {useStateValue} from "../Context/StateProvider"
+import {actionType} from "../Context/reducer"
+import {IoAdd} from "react-icons/io5"
+import {NavLink} from "react-router-dom"
+import SongContainer from "./SongContainer"
 
 const DashboardSongs = () => {
-    const [songFilter, setSongFilter] = useState("");
-    const [isFocus, setIsFocus] = useState(false);
-    const [filteredSongs, setFilteredSongs] = useState(null);
+    const [songFilter, setSongFilter] = useState("")
+    const [isFocus, setIsFocus] = useState(false)
+    const [filteredSongs, setFilteredSongs] = useState(null)
 
-    const [{allSongs}, dispatch] = useStateValue();
+    const [{allSongs}, dispatch] = useStateValue()
 
     useEffect(() => {
         if (!allSongs) {
@@ -21,10 +21,10 @@ const DashboardSongs = () => {
                 dispatch({
                     type: actionType.SET_ALL_SONGS,
                     allSongs: data.data,
-                });
-            });
+                })
+            })
         }
-    }, []);
+    }, [])
 
     useEffect(() => {
         if (songFilter.length > 0) {
@@ -34,12 +34,12 @@ const DashboardSongs = () => {
                     data.language.toLowerCase().includes(songFilter) ||
                     data.name.toLowerCase().includes(songFilter) ||
                     data.category.toLowerCase().includes(songFilter)
-            );
-            setFilteredSongs(filtered);
+            )
+            setFilteredSongs(filtered)
         } else {
-            setFilteredSongs(null);
+            setFilteredSongs(null)
         }
-    }, [songFilter]);
+    }, [songFilter])
 
     return (
         <div className="w-full p-4 flex items-center justify-center flex-col">
@@ -68,8 +68,8 @@ const DashboardSongs = () => {
                         animate={{opacity: 1}}
                         whileTap={{scale: 0.75}}
                         onClick={() => {
-                            setSongFilter("");
-                            setFilteredSongs(null);
+                            setSongFilter("")
+                            setFilteredSongs(null)
                         }}
                     >
                         <AiOutlineClear className="text-3xl text-textColor cursor-pointer"/>
@@ -90,7 +90,7 @@ const DashboardSongs = () => {
                 <SongContainer data={filteredSongs ? filteredSongs : allSongs}/>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default DashboardSongs;
+export default DashboardSongs

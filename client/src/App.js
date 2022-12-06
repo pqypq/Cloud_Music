@@ -1,53 +1,53 @@
-import React, {useEffect, useState} from "react";
-import {Route, Routes, useNavigate} from "react-router-dom";
-import "./App.css";
-import {getAuth,} from "firebase/auth";
-import {app} from "./config/firebase.config";
-import {getAllSongs, validateUser} from "./api";
-import {Dashboard, Home, Loader, Login, MusicPlayer, UserProfile,} from "./components";
-import {useStateValue} from "./Context/StateProvider";
-import {actionType} from "./Context/reducer";
-import {AnimatePresence, motion} from "framer-motion";
-import ArtistsDetail from "./components/ArtistsDetail";
-import AlbumDetail from "./components/AlbumDetail";
+import React, {useEffect, useState} from "react"
+import {Route, Routes, useNavigate} from "react-router-dom"
+import "./App.css"
+import {getAuth,} from "firebase/auth"
+import {app} from "./config/firebase.config"
+import {getAllSongs, validateUser} from "./api"
+import {Dashboard, Home, Loader, Login, MusicPlayer, UserProfile,} from "./components"
+import {useStateValue} from "./Context/StateProvider"
+import {actionType} from "./Context/reducer"
+import {AnimatePresence, motion} from "framer-motion"
+import ArtistsDetail from "./components/ArtistsDetail"
+import AlbumDetail from "./components/AlbumDetail"
 
 function App() {
-    const firebaseAuth = getAuth(app);
-    const navigate = useNavigate();
-    const [{user, allSongs, song, isSongPlaying, miniPlayer}, dispatch] = useStateValue();
-    const [isLoading, setIsLoading] = useState(false);
+    const firebaseAuth = getAuth(app)
+    const navigate = useNavigate()
+    const [{user, allSongs, song, isSongPlaying, miniPlayer}, dispatch] = useStateValue()
+    const [isLoading, setIsLoading] = useState(false)
 
     const [auth, setAuth] = useState(
         window.localStorage.getItem("auth") === "true"
-    );
+    )
 
     useEffect(() => {
-        setIsLoading(true);
+        setIsLoading(true)
         firebaseAuth.onAuthStateChanged((userCred) => {
             if (userCred) {
                 userCred.getIdToken().then((token) => {
-                    // console.log(token);
-                    window.localStorage.setItem("auth", "true");
+                    // console.log(token)
+                    window.localStorage.setItem("auth", "true")
                     validateUser(token).then((data) => {
                         dispatch({
                             type: actionType.SET_USER,
                             user: data,
-                        });
-                    });
-                });
-                setIsLoading(false);
+                        })
+                    })
+                })
+                setIsLoading(false)
             } else {
-                setAuth(false);
+                setAuth(false)
                 dispatch({
                     type: actionType.SET_USER,
                     user: null,
-                });
-                setIsLoading(false);
-                window.localStorage.setItem("auth", "false");
-                navigate("/login");
+                })
+                setIsLoading(false)
+                window.localStorage.setItem("auth", "false")
+                navigate("/login")
             }
-        });
-    }, []);
+        })
+    }, [])
 
     useEffect(() => {
         if (!allSongs && user) {
@@ -55,10 +55,10 @@ function App() {
                 dispatch({
                     type: actionType.SET_ALL_SONGS,
                     allSongs: data.data,
-                });
-            });
+                })
+            })
         }
-    }, []);
+    }, [])
 
 
     return (
@@ -91,7 +91,7 @@ function App() {
                 )}
             </div>
         </AnimatePresence>
-    );
+    )
 }
 
-export default App;
+export default App

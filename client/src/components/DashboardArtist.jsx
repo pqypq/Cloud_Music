@@ -1,19 +1,19 @@
-import React, {useEffect} from "react";
-import {useStateValue} from "../Context/StateProvider";
-import {getAllArtist, getAllSongs} from "../api";
-import {actionType} from "../Context/reducer";
-import ArtistAlbumCard from "./ArtistAlbumCard";
+import React, {useEffect} from "react"
+import {useStateValue} from "../Context/StateProvider"
+import {getAllArtist, getAllSongs} from "../api"
+import {actionType} from "../Context/reducer"
+import ArtistAlbumCard from "./ArtistAlbumCard"
 
 const DashboardArtist = () => {
-    const [{allSongs, artists}, dispatch] = useStateValue();
+    const [{allSongs, artists}, dispatch] = useStateValue()
 
     useEffect(() => {
         if (!artists) {
             getAllArtist().then((data) => {
-                dispatch({type: actionType.SET_ARTISTS, artists: data.data});
-            });
+                dispatch({type: actionType.SET_ARTISTS, artists: data.data})
+            })
         }
-    }, []);
+    }, [])
 
     useEffect(() => {
         if (!allSongs) {
@@ -21,10 +21,10 @@ const DashboardArtist = () => {
                 dispatch({
                     type: actionType.SET_ALL_SONGS,
                     allSongs: data.data,
-                });
-            });
+                })
+            })
         }
-    }, []);
+    }, [])
 
     return (
         <div className="w-full p-4 flex items-center justify-center flex-col">
@@ -38,8 +38,8 @@ const DashboardArtist = () => {
                     ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
 
-export default DashboardArtist;
+export default DashboardArtist

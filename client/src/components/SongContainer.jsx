@@ -1,5 +1,5 @@
-import SongCard from "./SongCard";
-import React, {Component} from 'react';
+import SongCard from "./SongCard"
+import React, {Component} from 'react'
 
 class SongContainer extends Component {
     render() {
@@ -10,7 +10,7 @@ class SongContainer extends Component {
                         <SongCard key={song._id} data={song} index={i}/>
                     ))}
             </div>
-        );
+        )
     }
 }
 
