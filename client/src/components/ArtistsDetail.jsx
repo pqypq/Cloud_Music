@@ -64,7 +64,7 @@ class ArtistIntroduction1 extends Component {
         return (
             <div>
                 <div style={{marginTop: 30}}>
-                    His creation comes from the deepest emotion. His voice sings the brilliance of the soul. He regards
+                    This artist's creation comes from the deepest emotion. His voice sings the brilliance of the soul. He regards
                 </div>
                 <div style={{marginTop: 5}}>
                     music and dreams as energy, and he has reached an unreplaceable position all the way. He wrote the most
