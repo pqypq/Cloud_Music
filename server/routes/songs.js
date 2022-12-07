@@ -35,8 +35,7 @@ router.get("/album", async (req, res) => {
     const options = {
         sort: {createdAt: 1},
     }
-
-    const cursor = await song.find({artist: req.query.album})
+    const cursor = await song.find({album: req.query.album})
     if (cursor) {
         res.status(200).send({success: true, data: cursor})
     } else {

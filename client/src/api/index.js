@@ -66,8 +66,6 @@ export const getAllSongsForAlbum = async (album) => {
         const res = await axios.get(`${baseURL}api/songs/album`, {
             params: {album: album}
         })
-        console.log(album)
-        console.log(res.data)
         return res.data
     } catch (error) {
         return null
