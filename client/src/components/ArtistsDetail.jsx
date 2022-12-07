@@ -20,16 +20,17 @@ class ArtistsDetail extends Component {
 
     render() {
         return (
-            <div>
-                <Box sx={{minWidth: 1536}}>
-                    <Card variant="outlined">
-                        <CardContent>
-                            <img src={this.props.data.imageURL} alt="" width={300} style={{display: "inline-block"}}/>
-                            <AiOutlineClose onClick={this.props.closeDetail}
-                                            style={{float: "right", display: "inline-block"}}/>
-                        </CardContent>
-                    </Card>
-                </Box>
+            <div className={"w-full h-auto"}>
+                <Card variant="outlined">
+                    <CardContent>
+                        <img src={this.props.data.imageURL} alt="" width={300} style={{display: "inline-block"}}/>
+                        <span style={{verticalAlign: "top", marginLeft: 30, fontSize: 25}}>
+                            <b>{this.props.data.name}</b>
+                        </span>
+                        <AiOutlineClose onClick={this.props.closeDetail}
+                                        style={{float: "right", display: "inline-block"}}/>
+                    </CardContent>
+                </Card>
                 <div style={{marginTop: 40}}>
                     <SongContainer data={this.state.allSongsForArtist}/>
                 </div>
