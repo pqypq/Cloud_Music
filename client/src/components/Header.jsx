@@ -90,25 +90,6 @@ const Header = () => {
                         exit={{opacity: 0, y: 50}}
                         className="absolute z-10 top-12 right-0 w-275 p-4 gap-4 bg-card shadow-lg rounded-lg backdrop-blur-sm flex flex-col"
                     >
-                        <NavLink to={"/userProfile"}>
-                            <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-                                Profile
-                            </p>
-                        </NavLink>
-                        <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-                            My Favourites
-                        </p>
-                        <hr/>
-                        {user?.user.role === "admin" && (
-                            <>
-                                <NavLink to={"/dashboard/home"}>
-                                    <p className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out">
-                                        Dashboard
-                                    </p>
-                                </NavLink>
-                                <hr/>
-                            </>
-                        )}
                         <p
                             className="text-base text-textColor hover:font-semibold duration-150 transition-all ease-in-out"
                             onClick={logout}
