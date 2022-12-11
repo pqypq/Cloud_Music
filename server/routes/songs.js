@@ -43,7 +43,7 @@ router.post("/save", async (req, res) => {
         language: req.body.language,
         category: req.body.category,
     })
-    console.log(newSong)
+
     try {
         const savedSong = await newSong.save()
         res.status(200).send({song: savedSong})

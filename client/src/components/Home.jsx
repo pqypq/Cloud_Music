@@ -117,8 +117,8 @@ const Home = () => {
                 <p className="my-4 text-base text-textColor">
                     Searched for :
                     <span className="text-xl text-cartBg font-semibold">
-            {searchTerm}
-          </span>
+                        {searchTerm}
+                    </span>
                 </p>
             )}
 

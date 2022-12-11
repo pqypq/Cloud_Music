@@ -4,12 +4,10 @@ import "./App.css"
 import {getAuth,} from "firebase/auth"
 import {app} from "./config/firebase.config"
 import {getAllSongs, validateUser} from "./api"
-import {Dashboard, Home, Loader, Login, MusicPlayer, UserProfile,} from "./components"
+import {Dashboard, Home, Loader, Login, MusicPlayer} from "./components"
 import {useStateValue} from "./Context/StateProvider"
 import {actionType} from "./Context/reducer"
 import {AnimatePresence, motion} from "framer-motion"
-import ArtistsDetail from "./components/ArtistsDetail"
-import AlbumDetail from "./components/AlbumDetail"
 
 function App() {
     const firebaseAuth = getAuth(app)
@@ -74,7 +72,6 @@ function App() {
                     <Route path="/login" element={<Login setAuth={setAuth}/>}/>
                     <Route path="/*" element={<Home/>}/>
                     <Route path="/dashboard/*" element={<Dashboard/>}/>
-                    <Route path="/userProfile" element={<UserProfile/>}/>
                 </Routes>
 
                 {isSongPlaying && (

@@ -10,14 +10,6 @@ const artistSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        twitter: {
-            type: String,
-            required: true,
-        },
-        instagram: {
-            type: String,
-            required: true,
-        },
     },
     {timestamps: true}
 )

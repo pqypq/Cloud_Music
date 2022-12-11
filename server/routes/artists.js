@@ -4,10 +4,7 @@ const router = require("express").Router()
 
 router.get("/getAll", async (req, res) => {
     const options = {
-        // sort returned documents in ascending order
         sort: {createdAt: 1},
-        // Include only the following
-        // projection : {}
     }
 
     const cursor = await artist.find(options)
@@ -22,8 +19,6 @@ router.post("/save", async (req, res) => {
     const newArtist = artist({
         name: req.body.name,
         imageURL: req.body.imageURL,
-        twitter: req.body.twitter,
-        instagram: req.body.instagram,
     })
     try {
         const savedArtist = await newArtist.save()

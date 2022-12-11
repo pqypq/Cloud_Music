@@ -334,7 +334,7 @@ const DashboardNewSong = () => {
                                     className="px-8 py-2 rounded-md text-white bg-red-600 hover:shadow-lg"
                                     onClick={saveSong}
                                 >
-                                    Send
+                                    ok
                                 </motion.button>
                             )}
                         </div>
@@ -398,8 +398,6 @@ export const AddNewArtist = () => {
             const data = {
                 name: artistName,
                 imageURL: artistCoverImage,
-                twitter: twitter,
-                instagram: instagram,
             }
             saveNewArtist(data).then((res) => {
                 getAllArtist().then((artistData) => {
@@ -409,8 +407,6 @@ export const AddNewArtist = () => {
             setIsArtist(false)
             setArtistCoverImage(null)
             setArtistName("")
-            setTwitter("")
-            setInstagram("")
         }
     }
 
@@ -461,32 +457,6 @@ export const AddNewArtist = () => {
                     onChange={(e) => setArtistName(e.target.value)}
                 />
 
-                <div className="w-full lg:w-300 p-3 flex items-center rounded-md  shadow-sm border border-gray-300">
-                    <p className="text-base font-semibold text-gray-400">
-                        www.twitter.com/
-                    </p>
-                    <input
-                        type="text"
-                        placeholder="your id"
-                        className="w-full text-base font-semibold text-textColor outline-none bg-transparent"
-                        value={twitter}
-                        onChange={(e) => setTwitter(e.target.value)}
-                    />
-                </div>
-
-                <div className="w-full lg:w-300 p-3 flex items-center rounded-md  shadow-sm border border-gray-300">
-                    <p className="text-base font-semibold text-gray-400">
-                        www.instagram.com/
-                    </p>
-                    <input
-                        type="text"
-                        placeholder="your id"
-                        className="w-full text-base font-semibold text-textColor outline-none bg-transparent"
-                        value={instagram}
-                        onChange={(e) => setInstagram(e.target.value)}
-                    />
-                </div>
-
                 <div className="w-full lg:w-300 flex items-center justify-center lg:justify-end">
                     {isArtist ? (
                         <DisabledButton/>
@@ -496,7 +466,7 @@ export const AddNewArtist = () => {
                             className="px-8 py-2 rounded-md text-white bg-red-600 hover:shadow-lg"
                             onClick={saveArtist}
                         >
-                            Send
+                            ok
                         </motion.button>
                     )}
                 </div>
@@ -609,7 +579,7 @@ export const AddNewAlbum = () => {
             <div className="flex flex-col items-center justify-center gap-4 ">
                 <input
                     type="text"
-                    placeholder="Artist Name"
+                    placeholder="Album Name"
                     className="w-full lg:w-300 p-3 rounded-md text-base font-semibold text-textColor outline-none shadow-sm border border-gray-300 bg-transparent"
                     value={artistName}
                     onChange={(e) => setArtistName(e.target.value)}
@@ -624,7 +594,7 @@ export const AddNewAlbum = () => {
                             className="px-8 py-2 rounded-md text-white bg-red-600 hover:shadow-lg"
                             onClick={saveArtist}
                         >
-                            Send
+                            ok
                         </motion.button>
                     )}
                 </div>
