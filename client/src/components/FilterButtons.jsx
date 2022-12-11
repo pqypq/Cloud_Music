@@ -46,7 +46,7 @@ const FilterButtons = ({filterData, flag}) => {
                     <MenuItem value={flag}>{flag}</MenuItem>
                     {filterData?.map((data, i) => (
                         <MenuItem value={data.name} key={i}>
-                            <span style={{display: "inline-block"}}>
+                            <span style={{display: "inline-block", marginRight: 10}}>
                                 {(flag === "Artist" || flag === "Albums") && (
                                     <img
                                         src={data.imageURL}
