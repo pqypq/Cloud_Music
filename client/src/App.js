@@ -24,7 +24,6 @@ function App() {
         firebaseAuth.onAuthStateChanged((userCred) => {
             if (userCred) {
                 userCred.getIdToken().then((token) => {
-                    // console.log(token)
                     window.localStorage.setItem("auth", "true")
                     validateUser(token).then((data) => {
                         dispatch({
@@ -62,12 +61,6 @@ function App() {
     return (
         <AnimatePresence>
             <div className="h-auto flex items-center justify-center min-w-[680px]">
-                {isLoading ||
-                    (!user && (
-                        <div className="fixed inset-0 bg-loaderOverlay backdrop-blur-sm ">
-                            <Loader/>
-                        </div>
-                    ))}
                 <Routes>
                     <Route path="/login" element={<Login setAuth={setAuth}/>}/>
                     <Route path="/*" element={<Home/>}/>
