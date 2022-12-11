@@ -1,10 +1,7 @@
-import React, {Component, useState} from "react"
-import {IoChevronDown} from "react-icons/io5"
-
-import {motion} from "framer-motion"
+import React, {useState} from "react"
 import {useStateValue} from "../Context/StateProvider"
 import {actionType} from "../Context/reducer"
-import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
+import {Box, FormControl, MenuItem, Select} from "@mui/material";
 
 const FilterButtons = ({filterData, flag}) => {
     const [selectName, setSelectName] = useState(flag)

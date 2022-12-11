@@ -4,8 +4,6 @@ import {useStateValue} from "../Context/StateProvider"
 import {getAllAlbums, getAllArtist} from "../api"
 import {filterByLanguage, filters} from "../utils/supportfunctions"
 import FilterButtons from "./FilterButtons"
-import {MdClearAll} from "react-icons/md"
-import {motion} from "framer-motion"
 
 const Filter = ({setFilteredSongs}) => {
     const [{filterTerm, artists, allAlbums}, dispatch] = useStateValue()
