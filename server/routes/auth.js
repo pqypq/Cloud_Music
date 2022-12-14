@@ -14,7 +14,6 @@ router.get("/login", async (req, res) => {
         if (!decodeValue) {
             return res.status(500).json({message: "Un Authorize"})
         }
-        // checking user email already exists or not
         const userExists = await user.findOne({user_id: decodeValue.user_id})
         if (!userExists) {
             await newUserData(decodeValue, req, res)
@@ -22,7 +21,6 @@ router.get("/login", async (req, res) => {
             await updateUserData(decodeValue, req, res)
         }
     } catch (error) {
-        console.log(error)
         return res.status(500).json({message: error})
     }
 })
